@@ -1,0 +1,7 @@
+Person Information:
+Name is:test 123
+Email is: test123
+
+Ticket Information
+Seat row :B Seat Index: 2
+Price of the ticket is: 200

@@ -1,0 +1,7 @@
+Person Information:
+Name is:hasindi thiranya
+Email is: hasindihikkaduwa@gmail.com
+
+Ticket Information
+Seat row :A Seat Index: 3
+Price of the ticket is: 200

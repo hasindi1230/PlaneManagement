@@ -1,0 +1,7 @@
+Person Information:
+Name is:re we
+Email is: we
+
+Ticket Information
+Seat row :C Seat Index: 4
+Price of the ticket is: 200
