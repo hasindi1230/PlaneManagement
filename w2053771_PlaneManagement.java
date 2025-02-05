@@ -103,8 +103,7 @@ public class w2053771_PlaneManagement {
         System.out.println("\n");
 
         //person object
-        Person info = new Person(name, surname, email);
-        System.out.println("\n");
+        Person person = new Person(name, surname, email);
 
         System.out.println("Enter a row letter A,B,C or D");
         String seat_row = input.next().toUpperCase();
@@ -126,18 +125,22 @@ public class w2053771_PlaneManagement {
             System.out.println("Seat reserved");
             //NEWWWW
             System.out.println("Information of the person is as follows: ");
-            Person.person_info();
+            person.person_info();
+
             int price=0;
 
             //adding a new ticket
-            add_a_new_ticket(seat_row,seat_index,price);
+            add_a_new_ticket(seat_row,seat_index,price, name, surname, email);
             System.out.println("\n");
 
             ticketTest tick = new ticketTest(seat_row, seat_index, price, name,surname,email);
-            ticketTest.ticket_info();
+
+            tick.ticket_info();
 
             System.out.println("Ticket booked successfully!!!");
-            ticketTest.save();
+            System.out.println("\n");
+
+            tick.save();
 
             num_of_tickets_sold++;
 
@@ -146,10 +149,10 @@ public class w2053771_PlaneManagement {
         }
     }
 
-    public static void add_a_new_ticket(String seat_row, int seat_index, int price){
+    public static void add_a_new_ticket(String seat_row, int seat_index, int price, String name, String surname, String email){
         for (int i = 0; i< ticketTest.ticket.length; i++){
             if (ticketTest.ticket[i] == null){
-                ticketTest.ticket[i] = new ticketTest(seat_row, seat_index , price, ticketTest.getName(),ticketTest.getSurname(),ticketTest.getEmail() );
+                ticketTest.ticket[i] = new ticketTest(seat_row, seat_index , price, name, surname, email );
                 break;
             }
         }
@@ -203,38 +206,90 @@ public class w2053771_PlaneManagement {
         }
     }
 
-    private static void search_ticket(){
+    private static void search_ticket() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Input a row letter (A-D) :");
+        System.out.println("Input a row letter (A-D):");
         String search_row = input.next().toUpperCase();
 
-        if(!search_row.matches("[A-D]")){
+        if (!search_row.matches("[A-D]")) {
             System.out.println("Invalid row letter");
+            return;
         }
 
         System.out.println("Enter the seat number:");
         int search_seat = input.nextInt();
 
-        if(search_seat< 0 || search_seat> seats_per_row[search_row.charAt(0)-'A']){
+        if (search_seat < 1 || search_seat > seats_per_row[search_row.charAt(0) - 'A']) {
             System.out.println("Invalid seat selection");
+            return;
         }
-        if (seats[search_row.charAt(0)-'A'][search_seat]){
+
+        if (!seats[search_row.charAt(0) - 'A'][search_seat - 1]) {
             System.out.println("Seat has not been booked and is already available");
+        } else {
+            for (ticketTest ticket : tickets) {
+                if (ticket != null && ticket.getRow().equals(search_row) && ticket.getSeat() == (search_seat - 1)) {
+                    System.out.println("DEBUG: Checking Ticket - Row: " + ticket.getRow() + ", Seat: " + (ticket.getSeat() + 1));
+                    System.out.println("Ticket has already been purchased.");
+                    System.out.println("Details of the person who purchased the ticket:");
+                    System.out.println("Name: " + ticket.getName() + " " + ticket.getSurname());
+                    System.out.println("Email: " + ticket.getEmail());
+                    System.out.println("\nTicket information:");
+                    ticket.ticket_info();
+                    return;
+                }
+            }
+            System.out.println("Seat is booked, but ticket information is not found.");
         }
-        else{
-            System.out.println("Ticket has already been purchased.");
-            System.out.println("Details of the person who purchased the ticket is as follows:");
-            System.out.println("Name is: " + " " + ticketTest.getName() + " " + ticketTest.getSurname());
-            System.out.println("Email is: " + " " + ticketTest.getEmail());
-            System.out.println("\n");
-            System.out.println("Ticket information is as follows:");
-            ticketTest.ticket_info();
-
-        }
-
-
-
     }
+
+//    private static void search_ticket(){
+//        Scanner input = new Scanner(System.in);
+//        System.out.println("Input a row letter (A-D) :");
+//        String search_row = input.next().toUpperCase();
+//
+//        if(!search_row.matches("[A-D]")){
+//            System.out.println("Invalid row letter");
+//            return;
+//        }
+//
+//        System.out.println("Enter the seat number:");
+//        int search_seat = input.nextInt();
+//
+//        if(search_seat< 0 || search_seat> seats_per_row[search_row.charAt(0)-'A']){
+//            System.out.println("Invalid seat selection");
+//            return;
+//        }
+//        if (!seats[search_row.charAt(0)-'A'][search_seat]){
+//            System.out.println("Seat has not been booked and is already available");
+//        }
+//        else{
+//            for (ticketTest ticket : tickets) {
+//                if (ticket != null && ticket.getRow().equals(search_row) && ticket.getSeat() == search_seat) {
+//                    System.out.println("DEBUG: Checking Ticket - Row: " + ticket.getRow() + ", Seat: " + (ticket.getSeat() + 1));
+//
+//                    System.out.println("Ticket has already been purchased.");
+//                    System.out.println("Details of the person who purchased the ticket:");
+//                    System.out.println("Name: " + ticket.getName() + " " + ticket.getSurname());
+//                    System.out.println("Email: " + ticket.getEmail());
+//                    System.out.println("\nTicket information:");
+//                    ticket.ticket_info();
+//                    return; // Exit after finding the correct ticket
+//                }
+//            }
+//            System.out.println("Ticket has already been purchased.");
+//            System.out.println("Details of the person who purchased the ticket is as follows:");
+//            System.out.println("Name is: " + " " + ticketTest.getName() + " " + ticketTest.getSurname());
+//            System.out.println("Email is: " + " " + ticketTest.getEmail());
+//            System.out.println("\n");
+//            System.out.println("Ticket information is as follows:");
+//            ticketTest.ticket_info();
+
+
+
+
+
+
 
 
 }

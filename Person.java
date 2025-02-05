@@ -1,41 +1,42 @@
 public class Person{
-    public static String name;
-    public static String surname;
-    public static String email;
+    private String name;
+    private String surname;
+    private String email;
 
     //constructors
 
     public Person(String name , String surname, String email){
-        Person.name = name;
-        Person.surname = surname;
-        Person.email = email;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
     }
 
     //getters and setters
-    public static String getName(){
+    public String getName(){
         return name;
     }
 
-    public void setName(String name){
-        Person.name = name;
+    public void setName(String name) {
+        this.name = name;
     }
-    public static String getSurname(){
+
+    public String getSurname(){
         return surname;
     }
 
-    public void setSurname(String surname){
-        Person.surname = surname;
-    }
-    public static String getEmail(){
-        return email;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
+    public String getEmail(){
+        return email;
+    }
     public void setEmail(String email){
-        Person.email = email;
+        this.email = email;
     }
 
     //method to print info
-    public static void person_info(){
+    public void person_info(){
         System.out.println("Your name : " + name);
         System.out.println("Your surname :" + surname);
         System.out.println("Your email address : " + email);

@@ -1,6 +1,6 @@
 Person Information:
 Name is:hasindi thiranya
-Email is: hasindithira
+Email is: hasi@gmail.com
 
 Ticket Information
 Seat row :A Seat Index: 5
